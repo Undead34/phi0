@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='login.css') }}"
+    />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="log-form">
+      <h2>Login to dashboard</h2>
+      <form action="/login" method="post">
+        <span class="error">
+          {% if error_message %}
+            {{ error_message }}
+          {% endif %}
+        </span>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input
+          name="account"
+          type="text"
+          title="username"
+          placeholder="username"
+        />
+        <input
+          name="password"
+          type="password"
+          title="username"
+          placeholder="password"
+        />
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </div>
+  </body>
+</html>

