@@ -8,6 +8,7 @@ __pycache__/
 *$py.class
 *.secrets.json
 # C extensions
+flask_session
 *.so
 
 # Distribution / packaging
