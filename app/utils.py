@@ -1,28 +1,26 @@
 import socket
 import user_agents
+from flask import request  # Asumiendo que estás usando Flask
 
 def collect_user_info(request):
     # Obtener información del user agent y otros datos
     user_agent_string = request.headers.get('User-Agent', 'unknown')
     
     print("###################")
-    headers = request.headers
-    for key, value in headers.items():
+    for key, value in request.headers.items():
         print(f"{key}: {value}")
     print("###################")
 
-    if request.headers.getlist("X-Forwarded-For"):
-        user_ip = request.headers.getlist("X-Forwarded-For")[0]
-    else:
-        user_ip = request.remote_addr
-    
+    user_ip = request.headers.get("True-Client-Ip") or \
+              request.headers.getlist("X-Forwarded-For")[0] or \
+              request.remote_addr
+
     try:
         user_host = socket.gethostbyaddr(user_ip)[0]
     except socket.herror:
         user_host = 'unknown'
 
-    headers = request.headers
-    full_path = request.full_path
+    full_path = request.full_path if hasattr(request, 'full_path') else 'unknown'
     referer = request.headers.get('Referer', 'unknown')
     accept_languages = request.headers.get('Accept-Language', 'unknown')
 
