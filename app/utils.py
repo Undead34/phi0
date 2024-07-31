@@ -22,7 +22,6 @@ def collect_user_info(request):
         user_host = 'unknown'
 
     headers = request.headers
-    http_method = request.method
     full_path = request.full_path
     referer = request.headers.get('Referer', 'unknown')
     accept_languages = request.headers.get('Accept-Language', 'unknown')
