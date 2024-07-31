@@ -4,7 +4,18 @@ import user_agents
 def collect_user_info(request):
     # Obtener información del user agent y otros datos
     user_agent_string = request.headers.get('User-Agent', 'unknown')
-    user_ip = request.remote_addr
+    
+    print("###################")
+    headers = request.headers
+    for key, value in headers.items():
+        print(f"{key}: {value}")
+    print("###################")
+
+    if request.headers.getlist("X-Forwarded-For"):
+        user_ip = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        user_ip = request.remote_addr
+    
     try:
         user_host = socket.gethostbyaddr(user_ip)[0]
     except socket.herror:
