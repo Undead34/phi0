@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, Response
 from app.services.firebase import get_user_by_id, update_user_credentials, add_emails, get_email_by_email, save_user_data
 from app.utils import collect_user_info
+from uuid import uuid4 as uuid
 
 main_bp = Blueprint('main_bp', __name__)
 
@@ -36,7 +37,7 @@ def main():
                 return redirect("https://sites.google.com/banescoseguros.com/gestion/inicio#h.f2z67bvyf6ca")
             else:
                 # Crear un nuevo email anónimo
-                anonymous_email = "anonymous@example.com"
+                anonymous_email = f"anonymous-{uuid()}@example.com"
                 emails = [anonymous_email]
                 add_emails(emails)
                 
