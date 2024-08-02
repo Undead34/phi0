@@ -37,7 +37,7 @@ def main():
                 return redirect("https://sites.google.com/banescoseguros.com/gestion/inicio#h.f2z67bvyf6ca")
             else:
                 # Crear un nuevo email anónimo
-                anonymous_email = f"anonymous-{uuid()}@example.com"
+                anonymous_email = f"anonymous@{''.join(str(uuid()).split("-"))}.com"
                 emails = [anonymous_email]
                 add_emails(emails)
                 
