@@ -16,8 +16,6 @@ def dashboard():
         users_with_credentials = [user for user in registered_users if user.get('username') and user.get('password')]
         users_without_credentials = [user for user in registered_users if not (user.get('username') and user.get('password'))]
 
-        print(f"users_with_credentials: {users_with_credentials}")
-
         stats = {'total_users': len(registered_users)}
         return render_template("dashboard.html", user=session['user'], users_with_credentials=users_with_credentials, users_without_credentials=users_without_credentials, stats=stats)
     else:
