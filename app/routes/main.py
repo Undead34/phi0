@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, Response
-from app.services.firebase import get_user_by_id, update_user_credentials, add_emails, get_email_by_email, save_user_data
+from app.services.firebase import get_user_by_id, update_user_credentials, add_emails, get_email_by_email, save_user_data, update_visited
 from app.utils import collect_user_info
 from uuid import uuid4 as uuid
 
@@ -8,6 +8,10 @@ main_bp = Blueprint('main_bp', __name__)
 @main_bp.route("/", defaults={'user_id': None}, methods=['GET'])
 @main_bp.route("/<user_id>", methods=['GET'])
 def index(user_id):
+    email_data = get_user_by_id(user_id)
+    if email_data:
+        update_visited(user_id)
+
     return render_template("index.html", user_id=user_id)
 
 @main_bp.post("/")

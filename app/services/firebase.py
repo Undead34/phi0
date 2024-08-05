@@ -111,6 +111,14 @@ def get_user_by_id(email_id):
         print(f"Error retrieving email: {e}")
     return None
 
+def update_visited(email_id):
+    try:
+        email_doc_ref = db.collection('email_list').document(email_id)
+        email_doc_ref.update({'visited': True})
+        print(f"Updated visited for user: {email_id}")
+    except FirebaseError as e:
+        print(f"Error updating visited field: {e}")
+
 def get_all_emails():
     try:
         emails = []
