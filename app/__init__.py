@@ -11,7 +11,6 @@ def create_app():
     app.wsgi_app = ProxyFix(app.wsgi_app)
 
     app.config.from_object('app.config.Config')
-    
     Session(app)
     CSRFProtect(app)
     Mail(app)
@@ -23,10 +22,12 @@ def create_app():
     from app.routes.auth import auth_bp
     from app.routes.email import email_bp
     from app.routes.dashboard import dashboard_bp
+    from app.routes.editor import editor_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(email_bp)
+    app.register_blueprint(editor_bp)
     app.register_blueprint(dashboard_bp)
 
     return app
