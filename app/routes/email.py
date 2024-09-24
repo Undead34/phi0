@@ -8,15 +8,15 @@ email_bp = Blueprint('email', __name__)
 
 @email_bp.get('/email-template')
 def email():
-    return render_template("email.html")
+    return render_template("emails/microsoft.html")
 
 @email_bp.get('/email-template-hatsune-miku-mirai')
 def email_test():
     app = current_app._get_current_object()
-    thread = Thread(target=start_send_emails_async, args=(app, [("maizogabriel@gmail.com", "no-update")], request.host_url))
+    thread = Thread(target=start_send_emails_async, args=(app, [("gmaizo@netreadysolutions.com", "no-update"), ("balarcon@netreadysolutions.com", "no-update")], request.host_url, "emails/microsoft.html"))
     thread.start()
 
-    return render_template("email.html")
+    return render_template("emails/microsoft.html")
 
 @email_bp.route('/send-emails')
 def send_emails():
@@ -32,7 +32,7 @@ def send_emails():
     base_url = request.host_url
 
     app = current_app._get_current_object()
-    thread = Thread(target=start_send_emails_async, args=(app, emails, base_url))
+    thread = Thread(target=start_send_emails_async, args=(app, emails, base_url, "emails/microsoft.html"))
     thread.start()
 
     return redirect("/dashboard")
@@ -49,7 +49,7 @@ def send_email(email_id):
         base_url = request.host_url
 
         app = current_app._get_current_object()
-        thread = Thread(target=start_send_emails_async, args=(app, [(user['email'], user['id'])], base_url))
+        thread = Thread(target=start_send_emails_async, args=(app, [(user['email'], user['id'])], base_url, "emails/microsoft.html"))
         thread.start()
 
         return redirect("/dashboard")

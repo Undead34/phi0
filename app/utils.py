@@ -1,6 +1,6 @@
 import socket
 import user_agents
-from flask import request  # Asumiendo que estás usando Flask
+import os
 
 def collect_user_info(request):
     # Obtener información del user agent y otros datos
@@ -31,17 +31,19 @@ def collect_user_info(request):
     os_version = ua.os.version_string
     device = ua.device.family
 
-    print(f"User Agent: {user_agent_string}")
-    print(f"User IP: {user_ip}")
-    print(f"User Host: {user_host}")
-    print(f"Full Path: {full_path}")
-    print(f"Referer: {referer}")
-    print(f"Accept Languages: {accept_languages}")
-    print(f"Browser: {browser}")
-    print(f"Browser Version: {browser_version}")
-    print(f"OS: {os}")
-    print(f"OS Version: {os_version}")
-    print(f"Device: {device}")
+    # Only in development
+    if os.environ.get("DEVELOPMENT", False):
+        print(f"User Agent: {user_agent_string}")
+        print(f"User IP: {user_ip}")
+        print(f"User Host: {user_host}")
+        print(f"Full Path: {full_path}")
+        print(f"Referer: {referer}")
+        print(f"Accept Languages: {accept_languages}")
+        print(f"Browser: {browser}")
+        print(f"Browser Version: {browser_version}")
+        print(f"OS: {os}")
+        print(f"OS Version: {os_version}")
+        print(f"Device: {device}")
 
     # Estructurar los datos para Firebase
     user_data = {

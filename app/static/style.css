@@ -1,154 +1,307 @@
 body {
-  color: #878787;
-  font-family: helvetica, arial, sans serif;
-  font-size: 1.3rem;
-  font-size: 13px;
+  font-family: "Segoe UI Webfont", -apple-system, "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima",
+    "Nirmala UI", "Gadugi", "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI",
+    "Raavi", "Iskoola Pota", "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic",
+    "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le",
+    "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  padding-bottom: 0.227px;
+  padding-top: 0.227px;
+  color: #000;
 }
 
-#wrapper {
-  background: url(https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-back.png)
-    80px 80px no-repeat;
-  width: 1086px;
-  padding: 0 20px 20px;
-  box-sizing: border-box;
-  margin: auto;
-}
-
-.logo-banesco {
+#lightbox {
   position: relative;
-  top: 25px;
-  left: 103px;
-}
-
-#form-login {
-  float: right;
-  width: 414px;
-  border: 1px solid #cccccc;
-  /*para Firefox*/
-  -moz-border-radius: 15px 15px 15px 15px;
-  /*para Safari y Chrome*/
-  -webkit-border-radius: 15px 15px 15px 15px;
-  /* para Opera */
-  border-radius: 15px 15px 15px 15px;
-  padding: 15px;
-
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-#form-login input[type="password"],
-#form-login input[type="email"] {
-  border: 1px solid #aaaaaa;
-  padding: 10px;
-  color: #878787;
-  font-size: 13px;
-
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-
-#form-login span {
-  display: block;
-  padding: 0px;
-  margin: 5px 0;
-}
-
-.button-iniciar,
-.button-cancelar {
-  /*para Firefox*/
-  -moz-border-radius: 10px;
-  /*para Safari y Chrome*/
-  -webkit-border-radius: 10px;
-  /* para Opera */
-  border-radius: 10px;
-  padding: 15px;
-
-  border: none;
-  color: white;
-  font-size: 13px;
-  cursor: pointer;
-  margin: 10px 5px;
-}
-
-.button-iniciar {
-  width: 136px;
-  background-color: #007953;
-  margin-left: 0px;
-}
-
-.button-cancelar {
-  width: 106px;
-  background-color: #bbbbbb;
-}
-
-.button-iniciar:hover {
-  background-color: #003510;
-}
-
-.button-cancelar:hover {
-  background-color: #777777;
-}
-
-.atencion {
-  background: url(https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-icono.png)
-    no-repeat;
-  padding: 4px 0 0 26px;
-}
-
-#logos {
-  width: 100%;
+  max-width: 440px;
+  width: calc(100% - 40px);
+  padding: 44px;
+  margin-bottom: 28px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  min-width: 320px;
+  min-height: 338px;
   overflow: hidden;
+}
+
+#credbox {
+  position: relative;
+  max-width: 440px;
+  width: calc(100% - 40px);
+  padding: 44px;
+  margin-bottom: 28px;
+  line-height: 16px;
+  min-width: 320px;
+  overflow: hidden;
+  padding: 0;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.segoe-ui {
+  font-family: "Segoe UI", "Helvetica Neue", "Lucida Grande", Roboto, Ebrima, "Nirmala UI", Gadugi,
+    "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha,
+    Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa",
+    "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti",
+    "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+}
+
+.title {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 300;
+  line-height: 1.75rem;
+  padding-bottom: 2.3632px;
+  padding-top: 2.3632px;
+  color: #1b1b1b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0;
+  margin-top: 16px;
   margin-bottom: 12px;
+  font-family: "Segoe UI", "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima", "Nirmala UI", "Gadugi",
+    "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI", "Raavi", "Iskoola Pota",
+    "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa",
+    "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti",
+    "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
 }
 
-#logos p {
-  float: left;
+.text-debug {
+  cursor: pointer;
+  transform: translate(12%, -10%);
+  font-size: 13px;
+  font-weight: 600;
+  height: 22px;
+  letter-spacing: 3px;
+  line-height: 22px;
+  outline-color: rgb(0, 0, 0);
+  outline-style: none;
+  outline-width: 0px;
+  text-align: left;
+  text-decoration: none;
+  text-wrap: nowrap;
+  vertical-align: top;
+  white-space-collapse: collapse;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.show-from-r {
+  -webkit-animation-name: show-from-right;
+  -webkit-animation-duration: 0.25s;
+  -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  -webkit-animation-fill-mode: both;
+  -webkit-transition-property: left;
+}
+
+@keyframes show-from-right {
+  from {
+    left: 200px;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.text-input,
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+textarea {
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  padding-left: 0;
+}
+
+.input.text-box {
+  padding: 4px 8px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
+  height: 32px;
+  height: 2rem;
+  padding: 6px 10px;
+  border-width: 1px;
+  border-color: #666;
+  border-color: rgba(0, 0, 0, 0.6);
+  height: 36px;
+  outline: none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  background-color: transparent;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  padding-left: 0;
+}
+
+.input.text-box:focus {
+  background-color: #fff;
+  border-color: #0067b8;
+  background-color: transparent;
+}
+
+.input.text-box:hover {
+  border-color: #323232;
+  border-color: rgba(0, 0, 0, 0.8);
+}
+
+.input.text-box::-moz-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+.input.text-box:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.input.text-box::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.input.text-box.has-error {
+  border-color: #e81123;
+}
+
+.input.text-box.has-error:focus {
+  border-color: #e81123;
+}
+
+a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+a:link {
+  color: #0067b8;
+}
+
+a:visited {
+  color: #0067b8;
+}
+
+a:hover {
+  color: #666;
+}
+
+a:focus {
+  color: #0067b8;
+}
+
+a:active {
+  color: #999;
+}
+
+.button {
+  min-width: 100px;
+  padding: 4px 12px 4px 12px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   position: relative;
-  top: 20px;
-}
-
-#logos img {
-  float: right;
-}
-
-#shadow {
-  background-color: #dddddd;
-  float: right;
-  width: 393px;
-  height: 10px;
-  clear: both;
-  margin-right: 20px;
-  display: none;
-
-  /*para Firefox*/
-  -moz-border-radius: 0px 0px 15px 15px;
-  /*para Safari y Chrome*/
-  -webkit-border-radius: 0px 0px 15px 15px;
-  /* para Opera */
-  border-radius: 0px 0px 15px 15px;
-  opacity: 0.3;
-}
-
-#banderas {
+  max-width: 100%;
   text-align: center;
-  margin-top: 50px;
-  float: right;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  text-overflow: ellipsis;
+  touch-action: manipulation;
+  border-style: solid;
+  border-width: 2px;
 }
 
-.ping {
+.button.secondary {
+  padding: 4px 12px 4px 12px;
   position: relative;
-  top: 183px;
-  left: 33px;
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  touch-action: manipulation;
+  color: #000;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  height: 32px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 108px;
+  line-height: normal;
   display: block;
-  float: left;
 }
 
-ul {
-  margin: 0px;
-  padding: 0px;
-  list-style-position: inside;
+.button.secondary:hover {
+  background-color: #b2b2b2;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-.error ul {
-  color: #d83300;
-  font-size: 11px;
+.button.secondary:focus {
+  background-color: #b2b2b2;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-decoration: underline;
+  outline: 2px solid #000;
+}
+
+.button.secondary:active {
+  outline: none;
+  text-decoration: none;
+  transform: scale(0.98);
+}
+
+.button.primary {
+  color: #fff;
+  border-color: #0067b8;
+  background-color: #0067b8;
+  display: block;
+}
+
+.button.primary:hover {
+  background-color: #005da6;
+}
+
+.button.primary:focus {
+  background-color: #005da6;
+  text-decoration: underline;
+  outline: 2px solid #000;
+}
+
+.button.primary:active {
+  outline: none;
+  text-decoration: none;
+  transform: scale(0.98);
 }
