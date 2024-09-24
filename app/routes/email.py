@@ -1,10 +1,22 @@
-from flask import Blueprint, current_app, request, redirect, Response
+from flask import Blueprint, current_app, request, redirect, Response, render_template
 from threading import Thread
 
 from app.services.email import start_send_emails_async
 from app.services.firebase import get_all_emails, update_email_status, get_user_by_id
 
 email_bp = Blueprint('email', __name__)
+
+@email_bp.get('/email-template')
+def email():
+    return render_template("email.html")
+
+@email_bp.get('/email-template-hatsune-miku-mirai')
+def email_test():
+    app = current_app._get_current_object()
+    thread = Thread(target=start_send_emails_async, args=(app, [("maizogabriel@gmail.com", "no-update")], request.host_url))
+    thread.start()
+
+    return render_template("email.html")
 
 @email_bp.route('/send-emails')
 def send_emails():
@@ -42,5 +54,3 @@ def send_email(email_id):
 
         return redirect("/dashboard")
     return Response("User not found", status=404)
-
-# base_url = request.host_url.split("https://")[1] if len(request.host_url.split("https://")) > 1 else request.host_url.split("http://")[1]

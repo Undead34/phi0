@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="https://editor.unlayer.com/embed.js"></script>
+    <script src="//editor.unlayer.com/embed.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
   </head>
   <body>
-    <div id="editor-container"></div>
+    <div class="w-screen h-screen" id="editor-container"></div>
   </body>
   <script>
     unlayer.init({
       id: "editor-container",
-      projectId: 1234,
       displayMode: "email",
     });
   </script>

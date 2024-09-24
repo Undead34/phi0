@@ -7,10 +7,15 @@ async def send_async_email(app, email_message, user_id):
     try:
         with app.app_context():
             email_message.send()
-        update_email_status(user_id, 'sent')
+        
+        if user_id != 'no-update':
+            update_email_status(user_id, 'sent')
+        
         app.logger.info(f"Email successfully sent to {email_message.to}")
     except Exception as e:
-        update_email_status(user_id, 'error')
+        if user_id != 'no-update':
+            update_email_status(user_id, 'error')
+
         app.logger.error(f"Failed to send email to {email_message.to}: {e}")
         app.logger.debug(f"Exception: {e}")
 
