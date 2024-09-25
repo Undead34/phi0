@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
 from flask_mailman import Mail
@@ -29,5 +29,9 @@ def create_app():
     app.register_blueprint(email_bp)
     app.register_blueprint(editor_bp)
     app.register_blueprint(dashboard_bp)
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return redirect("/"), 302
 
     return app

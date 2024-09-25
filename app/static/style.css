@@ -242,6 +242,7 @@ a:active {
   touch-action: manipulation;
   border-style: solid;
   border-width: 2px;
+  height: 32px;
 }
 
 .button.secondary {
@@ -257,7 +258,6 @@ a:active {
   border-style: solid;
   border-width: 2px;
   border-color: transparent;
-  height: 32px;
   border: none;
   background-color: rgba(0, 0, 0, 0.2);
   width: 108px;
