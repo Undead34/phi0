@@ -106,11 +106,11 @@ body {
 }
 
 .show-from-r {
-  -webkit-animation-name: show-from-right;
-  -webkit-animation-duration: 0.25s;
-  -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
-  -webkit-animation-fill-mode: both;
-  -webkit-transition-property: left;
+  animation-name: show-from-right;
+  animation-duration: 0.25s;
+  animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  animation-fill-mode: both;
+  transition-property: left;
 }
 
 @keyframes show-from-right {
