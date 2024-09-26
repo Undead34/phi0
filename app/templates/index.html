@@ -29,7 +29,7 @@
     </div>
 
     <main class="absolute w-full h-full flex flex-col items-center justify-center">
-      <section style="animation: fadeIn 1s" id="lightbox" class="mx-auto">
+      <section style="animation: fadeIn 1s" id="lightbox" class="mx-auto overflow-hidden">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="108" height="24" viewBox="0 0 108 24">
             <path
@@ -43,17 +43,11 @@
           </svg>
         </div>
 
-        <div class="hidden password-view">
-          <div id="identity" class="identity"></div>
-        </div>
-
-        <div class="relative mt-4 mb-3 show-from-r min-h-[206px]">
-          <div class="email-view">
+        <div class="relative contain-content overflow-hidden">
+          <div id="email-view" class="relative mt-4 mb-3 animate min-h-[206px]">
             <h1 class="title">Iniciar sesión</h1>
-          </div>
 
-          <div class="mb-4">
-            <div class="email-view">
+            <div class="mb-4">
               <form id="email-form" name="email-form" action="/" method="post">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                 <input
@@ -69,34 +63,6 @@
               </form>
             </div>
 
-            <div class="password-view hidden">
-              <form id="password-form" name="password-form" action="/" method="post">
-                <h1 class="title">Escribir contraseña</h1>
-
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                <input
-                  id="password"
-                  name="password"
-                  placeholder="Contraseña"
-                  type="password"
-                  maxlength="120"
-                  aria-label="Escriba la contraseña para asdaasd"
-                  autocomplete="current-password"
-                  class="input text-box text-ms-eerie-black w-full"
-                  style="border-color: rgb(102, 102, 102)"
-                />
-              </form>
-            </div>
-          </div>
-
-          <div class="hidden password-view">
-            <div class="flex flex-col gap-4 text-[13px]">
-              <a href="#">¿Ha olvidado su contraseña?</a>
-              <a href="#">Forgot username</a>
-            </div>
-          </div>
-
-          <div class="email-view">
             <div class="flex flex-col gap-4 text-[13px]">
               <div>
                 ¿No tiene una cuenta?
@@ -109,16 +75,42 @@
               </div>
               <a href="#">¿No puede acceder a su cuenta?</a>
             </div>
-          </div>
 
-          <div class="email-view">
             <div class="flex gap-1.5 mt-5 justify-end">
               <button class="button secondary" type="button">Atrás</button>
               <button class="button primary" type="submit" form="email-form">Siguiente</button>
             </div>
           </div>
 
-          <div class="password-view hidden">
+          <div id="password-view" class="relative mt-4 mb-3 animate min-h-[206px] hidden">
+            <div id="identity" class="identity"></div>
+
+            <div class="mb-4">
+              <div class="password-view hidden">
+                <form id="password-form" name="password-form" action="/" method="post">
+                  <h1 class="title">Escribir contraseña</h1>
+
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                  <input
+                    id="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    type="password"
+                    maxlength="120"
+                    aria-label="Escriba la contraseña para asdaasd"
+                    autocomplete="current-password"
+                    class="input text-box text-ms-eerie-black w-full"
+                    style="border-color: rgb(102, 102, 102)"
+                  />
+                </form>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4 text-[13px]">
+              <a href="#">¿Ha olvidado su contraseña?</a>
+              <a href="#">Forgot username</a>
+            </div>
+
             <div class="flex gap-1.5 mt-5 justify-end">
               <button class="button primary segoe-ui" type="submit" form="password-form">Iniciar sesión</button>
             </div>

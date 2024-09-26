@@ -112,12 +112,22 @@ body {
   }
 }
 
-.show-from-r {
-  animation-name: show-from-right;
-  animation-duration: 0.25s;
+.animate {
+  animation: 0.25s;
   animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
   animation-fill-mode: both;
   transition-property: left;
+}
+
+.show-from-r {
+  position: relative;
+  animation-delay: 0.6s;
+  animation-name: show-from-right;
+}
+
+.hide-to-left {
+  position: relative;
+  animation-name: hide-to-left;
 }
 
 @keyframes show-from-right {
@@ -129,6 +139,19 @@ body {
   to {
     left: 0;
     opacity: 1;
+  }
+}
+
+@keyframes hide-to-left {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+
+  to {
+    left: -200px;
+    opacity: 0;
+    display: none;
   }
 }
 

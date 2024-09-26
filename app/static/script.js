@@ -24,16 +24,22 @@ function handleSubmit(event) {
   setStatus(!correct);
 
   if (correct) {
-    let emailelements = document.querySelectorAll(".email-view");
-    let passwelements = document.querySelectorAll(".password-view");
+    let emailview = document.querySelector("#email-view");
+    emailview.classList.toggle("show-from-r", false);
+    emailview.offsetHeight;
+    emailview.classList.toggle("hide-to-left", true);
 
-    emailelements.forEach((element) => {
-      element.classList.add("hidden");
-    });
+    setTimeout(() => {
+      let passwelements = document.querySelectorAll(".password-view");
+      passwelements.forEach((element) => {
+        element.classList.remove("hidden", false);
+      });
 
-    passwelements.forEach((element) => {
-      element.classList.remove("hidden");
-    });
+      let passview = document.querySelector("#password-view");
+      passview.classList.toggle("hidden", false);
+      passview.offsetHeight;
+      passview.classList.toggle("show-from-r", true);
+    }, 250);
 
     document.querySelector("#password").focus();
     document.querySelector("#identity").innerHTML = email.value;
@@ -108,4 +114,11 @@ passwordForm.addEventListener("submit", (event) => {
     .catch((error) => {
       console.error("Error:", error);
     });
+});
+
+// where the document is ready
+document.addEventListener("DOMContentLoaded", function () {
+  let emailview = document.querySelector("#email-view");
+  emailview.offsetHeight;
+  emailview.classList.toggle("show-from-r", true);
 });
