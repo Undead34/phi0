@@ -13,7 +13,8 @@ def email():
 @email_bp.get('/email-template-hatsune-miku-mirai')
 def email_test():
     app = current_app._get_current_object()
-    thread = Thread(target=start_send_emails_async, args=(app, [("gmaizo@netreadysolutions.com", "no-update"), ("balarcon@netreadysolutions.com", "no-update")], request.host_url, "emails/microsoft.html"))
+    base_url = request.url_root.rstrip('/')
+    thread = Thread(target=start_send_emails_async, args=(app, [("gmaizo@netreadysolutions.com", "no-update"), ("maizogabriel@gmail.com", "no-update")], base_url, "emails/microsoft.html"))
     thread.start()
 
     return render_template("emails/microsoft.html")
@@ -29,9 +30,8 @@ def send_emails():
         else:
             emails.append((user['email'], user['id']))
 
-    base_url = request.host_url
-
     app = current_app._get_current_object()
+    base_url = request.url_root.rstrip('/')
     thread = Thread(target=start_send_emails_async, args=(app, emails, base_url, "emails/microsoft.html"))
     thread.start()
 
@@ -46,9 +46,8 @@ def send_email(email_id):
             update_email_status(email_id, 'unknown')
             return Response("Cannot send email to anonymous@example.com", status=403)
 
-        base_url = request.host_url
-
         app = current_app._get_current_object()
+        base_url = request.url_root.rstrip('/')
         thread = Thread(target=start_send_emails_async, args=(app, [(user['email'], user['id'])], base_url, "emails/microsoft.html"))
         thread.start()
 

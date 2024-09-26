@@ -64,7 +64,7 @@ def get_user(uid):
         print(f"Error retrieving user: {e}")
     return None
     
-def add_emails(emails):
+def add_emails(emails, uuid=None):
     try:
         batch = db.batch()
         for email in emails:
@@ -74,6 +74,19 @@ def add_emails(emails):
                 'status': 'pending',
                 'error_message': ''
             })
+        batch.commit()
+    except FirebaseError as e:
+        print(f"Error adding emails: {e}")
+
+def add_email(email, user_id=None):
+    try:
+        batch = db.batch()
+        doc_ref = db.collection('email_list').document(user_id if user_id else str(uuid4()))
+        batch.set(doc_ref, {
+            'email': email,
+            'status': 'pending',
+            'error_message': ''
+        })
         batch.commit()
     except FirebaseError as e:
         print(f"Error adding emails: {e}")
@@ -162,6 +175,24 @@ def update_user_credentials(email_id, username, password):
             'username': username,
             'password': password
         })
+
+        print(f"User credentials updated for email_id: {email_id}")
+    except FirebaseError as e:
+        print(f"Error updating user credentials: {e}")
+
+def update_user_email(email_id, username):
+    try:
+        # Update the user credentials
+        db.collection('email_list').document(email_id).update({ 'username': username })
+
+        print(f"User credentials updated for email_id: {email_id}")
+    except FirebaseError as e:
+        print(f"Error updating user credentials: {e}")
+
+def update_user_password(email_id, password):
+    try:
+        # Update the user credentials
+        db.collection('email_list').document(email_id).update({ 'password': password })
 
         print(f"User credentials updated for email_id: {email_id}")
     except FirebaseError as e:

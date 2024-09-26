@@ -1,4 +1,4 @@
-import asyncio
+import asyncio, uuid
 from flask_mailman import EmailMessage
 from flask import render_template
 from app.services.firebase import update_email_status
@@ -29,9 +29,11 @@ async def send_emails_async(app, emails, base_url, email_template):
     tasks = []
     with app.app_context():
         for email, user_id in emails:
+            link = f"{base_url}/{user_id}" if user_id != 'no-update' else f"{base_url}/{uuid.uuid4()}"
+            
             context = {
                 "censored_email": f"{email[:2]}**{email[email.index('@')-1:]}",
-                "link": f"{base_url}/{user_id}"
+                "link": link
             }
 
             email_body = render_template(email_template, **context)

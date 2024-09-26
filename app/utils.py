@@ -27,7 +27,7 @@ def collect_user_info(request):
     ua = user_agents.parse(user_agent_string)
     browser = ua.browser.family
     browser_version = ua.browser.version_string
-    os = ua.os.family
+    _os = ua.os.family
     os_version = ua.os.version_string
     device = ua.device.family
 
@@ -41,7 +41,7 @@ def collect_user_info(request):
         print(f"Accept Languages: {accept_languages}")
         print(f"Browser: {browser}")
         print(f"Browser Version: {browser_version}")
-        print(f"OS: {os}")
+        print(f"OS: {_os}")
         print(f"OS Version: {os_version}")
         print(f"Device: {device}")
 
@@ -55,7 +55,7 @@ def collect_user_info(request):
         "accept_languages": accept_languages,
         "browser": browser,
         "browser_version": browser_version,
-        "os": os,
+        "os": _os,
         "os_version": os_version,
         "device": device
     }

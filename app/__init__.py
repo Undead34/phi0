@@ -5,14 +5,17 @@ from flask_mailman import Mail
 from werkzeug.middleware.proxy_fix import ProxyFix
 import os
 
+csrf = None
+
 def create_app():
+    global csrf
     app = Flask(__name__)
     app.secret_key = os.getenv('SECRET_KEY')
     app.wsgi_app = ProxyFix(app.wsgi_app)
 
     app.config.from_object('app.config.Config')
     Session(app)
-    CSRFProtect(app)
+    csrf = CSRFProtect(app)
     Mail(app)
 
     from app.services.firebase import init_firebase
