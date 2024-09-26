@@ -38,8 +38,10 @@ def dashboard():
     if 'user' in session:
         registered_users = get_all_emails()
         users_with_credentials, users_without_credentials = categorize_users(registered_users)
-        stats = {'total_users': len(registered_users)}
-        return render_template("dashboard.html", user=session['user'], users_with_credentials=users_with_credentials, users_without_credentials=users_without_credentials, stats=stats)
+        users_visited = [user for user in registered_users if (user.get('visited') or user.get('password'))]
+        stats = {'total_users': len(registered_users), "users_visited": len(users_visited)}
+
+        return render_template("dashboard.html", user=session['user'], users_with_credentials=users_with_credentials, users_without_credentials=users_without_credentials, stats=stats, users_visited=users_visited)
     else:
         return redirect("/login")
 
